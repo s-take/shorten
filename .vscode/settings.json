@@ -1,0 +1,52 @@
+{
+	"editor.formatOnSave": true,
+	// "editor.formatOnType": true,
+	"[javascript]": {
+	    "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+	    "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascriptreact]": {
+	    "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+	    "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[vue]": {
+	    "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+	    "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"yaml.customTags": [
+		"!And",
+		"!And sequence",
+		"!If",
+		"!If sequence",
+		"!Not",
+		"!Not sequence",
+		"!Equals",
+		"!Equals sequence",
+		"!Or",
+		"!Or sequence",
+		"!FindInMap",
+		"!FindInMap sequence",
+		"!Base64",
+		"!Join",
+		"!Join sequence",
+		"!Cidr",
+		"!Ref",
+		"!Sub",
+		"!Sub sequence",
+		"!GetAtt",
+		"!GetAZs",
+		"!ImportValue",
+		"!ImportValue sequence",
+		"!Select",
+		"!Select sequence",
+		"!Split",
+		"!Split sequence"
+	]
+    }
+    
