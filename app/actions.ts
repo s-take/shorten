@@ -22,6 +22,10 @@ export async function requestShortUrl(prevState: State, formData: FormData) {
   const supabase = createClient(cookieStore);
   const longUrl = formData.get("longUrl");
   try {
+    // validation
+    schema.parse({ longUrl });
+
+    // exist check
     const { data: selectData, error: selectError } = await supabase
       .from("urls")
       .select()
@@ -30,11 +34,11 @@ export async function requestShortUrl(prevState: State, formData: FormData) {
     if (selectData && selectData?.length !== 0) {
       const url: Url = selectData[0];
       return {
-        shortUrl:
-          "https://" + process.env.NEXT_PUBLIC_DOMAIN + "/" + url.short_id,
+        shortUrl: "https://" + process.env.VERCEL_URL + "/" + url.short_id,
       };
     }
 
+    // insert
     const { data, error } = await supabase
       .from("urls")
       .insert({ url: longUrl })
@@ -51,9 +55,8 @@ export async function requestShortUrl(prevState: State, formData: FormData) {
     if (updateError !== null) {
       throw error;
     }
-    // return { res };
     return {
-      shortUrl: "https://" + process.env.NEXT_PUBLIC_DOMAIN + "/" + shortId,
+      shortUrl: "https://" + process.env.VERCEL_URL + "/" + shortId,
     };
   } catch (e) {
     console.log(e);
@@ -67,10 +70,4 @@ export async function requestShortUrl(prevState: State, formData: FormData) {
       },
     };
   }
-  //   try {
-  //     await doSomething();
-  //     return { message: null };
-  //   } catch (e) {
-  //     return { message: "Something went wrong" };
-  //   }
 }

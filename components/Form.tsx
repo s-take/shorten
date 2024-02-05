@@ -1,9 +1,34 @@
 "use client";
 
+import copy from "clipboard-copy";
 import { State, requestShortUrl } from "@/app/actions";
 import { useFormState, useFormStatus } from "react-dom";
+import { useState } from "react";
 
 const initialState: State = {};
+
+const CopyButton = ({ copyText }: { copyText: string }) => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = () => {
+    copy(copyText).then(() => {
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 3000);
+    });
+  };
+
+  return (
+    <button
+      className="bg-indigo-500 rounded-md px-2 py-0.5 text-white w-20"
+      disabled={isCopied}
+      onClick={handleCopy}
+    >
+      {isCopied ? "Copied!" : "Copy"}
+    </button>
+  );
+};
 
 function Submit() {
   const status = useFormStatus();
@@ -38,8 +63,13 @@ export default function Form() {
       <Submit />
       {state.error && <p>{state.error.message}</p>}
       <div className="sm:col-span-2">
-        <div className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
-          {state.shortUrl === undefined ? "https://" : state.shortUrl}
+        <div className="flex gap-4 w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+          <div>
+            {state.shortUrl === undefined ? "https://" : state.shortUrl}
+          </div>
+          <div>
+            {state.shortUrl && <CopyButton copyText={state.shortUrl} />}
+          </div>
         </div>
       </div>
     </form>
