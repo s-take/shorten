@@ -7,18 +7,17 @@ import * as base62 from "base62-ts";
 
 type Url = Database["public"]["Tables"]["urls"]["Row"];
 
+export type State = {
+  shortUrl?: string;
+  error?: { message: string; status: number };
+  inputErrors?: { longUrl: string };
+};
+
 const schema = z.object({
   longUrl: z.string().url(),
 });
 
-export async function requestShortUrl(
-  prevState: {
-    shortUrl?: string;
-    error?: { message: string; status: number };
-    inputErrors?: { longUrl: string };
-  },
-  formData: FormData
-) {
+export async function requestShortUrl(prevState: State, formData: FormData) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const longUrl = formData.get("longUrl");

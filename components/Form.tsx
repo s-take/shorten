@@ -1,9 +1,9 @@
 "use client";
 
-import { requestShortUrl } from "@/app/actions";
+import { State, requestShortUrl } from "@/app/actions";
 import { useFormState, useFormStatus } from "react-dom";
 
-const initialState = {};
+const initialState: State = {};
 
 function Submit() {
   const status = useFormStatus();
