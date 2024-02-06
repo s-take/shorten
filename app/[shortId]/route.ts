@@ -5,8 +5,8 @@ import type { Database } from "@/database.types";
 
 type Url = Database["public"]["Tables"]["urls"]["Row"];
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
+const defaultUrl = process.env.CUSTOM_DOMAIN
+  ? `https://${process.env.CUSTOM_DOMAIN}`
   : "http://localhost:3000";
 
 export async function GET(
