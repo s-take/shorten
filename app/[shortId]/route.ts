@@ -20,7 +20,9 @@ export async function GET(
 
   if (data && data.length !== 0) {
     const url: Url = data[0];
-    return NextResponse.redirect(url.url, { status: 302 });
+    return NextResponse.redirect(url.url, { status: 301 });
   }
-  return NextResponse.redirect("https://www.google.co.jp/", { status: 302 });
+  return NextResponse.redirect("https://" + process.env.VERCEL_URL, {
+    status: 301,
+  });
 }
