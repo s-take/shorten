@@ -5,6 +5,10 @@ import type { Database } from "@/database.types";
 
 type Url = Database["public"]["Tables"]["urls"]["Row"];
 
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { shortId: string } }
@@ -22,7 +26,7 @@ export async function GET(
     const url: Url = data[0];
     return NextResponse.redirect(url.url, { status: 301 });
   }
-  return NextResponse.redirect("https://" + process.env.VERCEL_URL, {
+  return NextResponse.redirect(defaultUrl, {
     status: 301,
   });
 }

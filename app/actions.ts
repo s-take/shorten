@@ -7,6 +7,10 @@ import * as base62 from "base62-ts";
 
 type Url = Database["public"]["Tables"]["urls"]["Row"];
 
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
+
 export type State = {
   shortUrl?: string;
   error?: { message: string; status: number };
@@ -34,7 +38,7 @@ export async function requestShortUrl(prevState: State, formData: FormData) {
     if (selectData && selectData?.length !== 0) {
       const url: Url = selectData[0];
       return {
-        shortUrl: "https://" + process.env.VERCEL_URL + "/" + url.short_id,
+        shortUrl: defaultUrl + "/" + url.short_id,
       };
     }
 
@@ -56,7 +60,7 @@ export async function requestShortUrl(prevState: State, formData: FormData) {
       throw error;
     }
     return {
-      shortUrl: "https://" + process.env.VERCEL_URL + "/" + shortId,
+      shortUrl: defaultUrl + "/" + shortId,
     };
   } catch (e) {
     console.log(e);
