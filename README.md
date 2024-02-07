@@ -7,6 +7,8 @@ https://sh.ststake.com で公開しています。
 
 無料枠で大丈夫です。urls というテーブルを作り、以下のような構成にしてください。
 
+<img width="654" alt="image" src="https://github.com/s-take/shorten/assets/5696157/f892095d-eefc-466f-b0b8-973744925184">
+
 ## ローカルで動かす場合
 
 .env.local を作成し、以下を環境変数を設定してください。それぞれ supabase の管理画面から確認して入力してください。
